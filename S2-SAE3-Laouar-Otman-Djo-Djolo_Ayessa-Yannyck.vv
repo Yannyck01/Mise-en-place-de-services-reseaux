@@ -1,9 +1,9 @@
 [virt-viewer]
 type=vnc
-title=S2-SAE3-Laouar-Otman-Djo-Djolo Ayessa-Yannyck
-host=one-dell2
-port=13323
-proxy=http://one-frontend:29876?token=a8qpyah6349apalbmem3
+title=S2-SAE3-LAOUAR-Otman-DJO-DJOLOAYESSA-Yannyck
+host=one-dell1
+port=13347
+proxy=http://one-frontend:29876?token=gfduz550flp2lwnfclw3
 fullscreen=0
 toggle-fullscreen=shift+f11
 release-cursor=shift+f12
