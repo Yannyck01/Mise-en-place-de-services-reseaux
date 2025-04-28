@@ -10,8 +10,8 @@ Il comprend les **extraits de fichiers de configuration** les plus pertinents ai
 
 ## Auteurs :
 
-- Nom-prénom binôme 1 : *[Nom à compléter]*
-- Nom-prénom binôme 2 : *[Nom à compléter]*
+- Nom-prénom binôme 1 : Laouar-Otman
+- Nom-prénom binôme 2 : Djo-Djolo Ayessa Yannyck
 
 ## Adresse IP de la Machine virtuelle
 
