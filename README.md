@@ -1,0 +1,219 @@
+**Modules Réseaux : SAÉ 2.03**
+
+# Compte-rendu d’installation et de configuration d'un serveur
+
+Ce fichier README **décrit les configurations** réalisées et **les éventuels problèmes** rencontrés.
+
+Il comprend les **extraits de fichiers de configuration** les plus pertinents ainsi que les **captures d'écran** réalisées, ainsi que les sites web utilisés.
+
+**Les fichiers de configuration complets sont à joindre au dépôt !**
+
+## Auteurs :
+
+- Nom-prénom binôme 1 : *[Nom à compléter]*
+- Nom-prénom binôme 2 : *[Nom à compléter]*
+
+## Adresse IP de la Machine virtuelle
+
+- 10.31.33.241
+
+---
+
+## I - Installation de services
+
+### 1. Gestion des services : systemd
+
+**Commandes utilisées :**
+- `man systemctl`
+- `systemctl`
+- `sudo apt-get install openssh-server`
+- `systemctl status sshd`
+- `ssh 10.31.33.241`
+- `exit` ou `CTRL+D`
+- `sudo systemctl stop sshd`
+- `ssh 10.31.33.241`
+- `sudo systemctl start sshd`
+- `ssh 10.31.33.241`
+
+**Problèmes rencontrés :** Aucun problème notable.
+
+**Captures d’écran :** voir `captures/ssh_tests.png`
+
+---
+
+### 2. Serveur Web apache2
+
+#### 2.1 Installation de base du serveur
+
+**Commandes utilisées :**
+- `sudo apt update`
+- `sudo apt install apache2`
+- `sudo systemctl start apache2`
+- Accès à http://10.31.33.241 pour vérification
+
+**Exploration :**
+- Consultation du fichier `/etc/apache2/apache2.conf`
+- Compréhension des liens symboliques `sites-enabled`/
+
+**Activation des pages utilisateurs :**
+- `sudo a2enmod userdir`
+- `sudo systemctl restart apache2`
+
+**Création du répertoire public_html :**
+- `mkdir /home/iut/public_html`
+- Attribution des droits à `www-data`
+- Protection contre l'indexation en modifiant `userdir.conf`
+
+**Création du fichier de test :**
+- `nano /home/iut/public_html/bienvenue.html` ("Bienvenue sur votre site perso")
+
+**Problèmes rencontrés :**
+- Problème d’accès lié aux permissions corrigé en ajustant les droits sur les répertoires.
+- Difficulté à désactiver l'indexation corrigée en éditant correctement `userdir.conf`.
+
+**Captures d’écran :** 
+
+#### 2.2 Installation du serveur Web virtuel
+
+**Commandes utilisées :**
+- `nslookup 10.31.33.241` (pour obtenir le DNS)
+- Création du répertoire mon-serveur (avec faute "mon-server") :
+  ```bash
+  mkdir /home/iut/mon-server
+  ```
+- Attribution des droits d'accès pour www-data avec `chmod`
+- Création du lien symbolique :
+  ```bash
+  sudo ln -s /home/iut/mon-server /var/www
+  ```
+- Création d'un fichier `index.html` de test dans `mon-server`
+- Copie de la configuration Apache :
+  ```bash
+  sudo cp /etc/apache2/sites-available/000-default.conf /etc/apache2/sites-available/2a4v3-31uvm0497.ad-urca.univ-reims.fr.conf
+  ```
+- Modification du fichier pour changer le `ServerName` et `DocumentRoot`
+- Activation du site :
+  ```bash
+  sudo a2ensite 2a4v3-31uvm0497.ad-urca.univ-reims.fr.conf
+  sudo systemctl reload apache2
+  ```
+
+**Problèmes rencontrés :**
+- Faute d'orthographe : répertoire "mon-server" au lieu de "mon-serveur" (faute conservée volontairement pour tout garder cohérent).
+- Problèmes de DNS corrigés après modification du `ServerName`.
+- Obligation de modifier aussi `000-default.conf` pour que HTTP redirige vers `/var/www/mon-server`.
+
+**Captures d’écran : **
+
+---
+
+### 3. Serveur Web sécurisé https
+
+**Commandes utilisées :**
+- `dpkg -l | grep ssl`
+- Installation des paquets nécessaires (si besoin) : `sudo apt install openssl ssl-cert`
+- Création du dossier SSL :
+  ```bash
+  sudo mkdir /etc/apache2/ssl
+  ```
+- Création du certificat auto-signé :
+  ```bash
+  sudo /usr/sbin/make-ssl-cert /usr/share/ssl-cert/ssleay.cnf /etc/apache2/ssl/apache.pem
+  ```
+  avec comme réponses : `10.31.33.241, DNS:2a4v3-31uvm0497.ad-urca.univ-reims.fr`
+
+- Copie du fichier SSL par défaut :
+  ```bash
+  sudo cp /etc/apache2/sites-available/default-ssl.conf /etc/apache2/sites-available/mon-serveur-ssl.conf
+  ```
+- Modification du fichier pour correspondre au `DocumentRoot /var/www/mon-server` et au `ServerName`.
+- Activation du module SSL :
+  ```bash
+  sudo a2enmod ssl
+  ```
+- Activation du site SSL :
+  ```bash
+  sudo a2ensite mon-serveur-ssl.conf
+  ```
+- Redémarrage du service Apache :
+  ```bash
+  sudo systemctl restart apache2
+  ```
+
+**Problèmes rencontrés :**
+- Erreur de syntaxe initiale dans `mon-serveur-ssl.conf` corrigée (mauvais ServerName, mauvais chemin d'accès).
+- Nécessité de corriger le nom du serveur car une mauvaise casse du DNS empêchait l’accès.
+- Le HTTP pointait initialement sur `/var/www/html` et non `/var/www/mon-server`, corrigé en ajustant également `000-default.conf`.
+
+**Captures d’écran :** 
+
+---
+
+### 4. Langage de programmation PHP
+
+**Commandes utilisées :**
+- Installation de PHP :
+  ```bash
+  sudo apt install php libapache2-mod-php
+  ```
+- Édition du fichier de configuration pour autoriser PHP dans les répertoires utilisateurs :
+  ```bash
+  sudo nano /etc/apache2/mods-enabled/php7.4.conf
+  ```
+- Commenter les 5 dernières lignes du fichier (`#` devant chaque ligne).
+- Redémarrage du service Apache :
+  ```bash
+  sudo systemctl restart apache2
+  ```
+
+**Création et test :**
+- Création d'un fichier PHP de test :
+  ```bash
+  nano /home/iut/public_html/index.php
+  ```
+  Contenu du fichier :
+  ```php
+  <?php phpinfo();
+  ```
+- Accès dans le navigateur à :
+  ```
+  http://2a4v3-31uvm0497.ad-urca.univ-reims.fr/~iut/index.php
+  ```
+
+**Problèmes rencontrés :**
+- Difficulté initiale à commenter les lignes dans nano (problème de saisie du `#` corrigé en copiant depuis la machine locale).
+- Validation correcte du fonctionnement de PHP via phpinfo().
+
+**Captures d’écran :**
+
+---
+
+## II - Webographie et recours à l'IA
+
+- **Sites consultés :**
+  - StackOverflow
+  - Forums Ubuntu-fr.org
+
+- **IA utilisée :** ChatGPT pour:
+  - Comprendre les erreurs de VirtualHost
+  - Corriger les erreurs SSL
+  - Aider à la configuration Apache et PHP
+
+**Prompts donnés :**
+- "Comment corriger l'erreur SSL certificate file not found sur Apache2"
+- "Comment configurer un VirtualHost Apache pour Ubuntu"
+- "Comment installer et configurer PHP sur Apache2"
+
+**Validité et vérifications :**
+- Tests systématiques après chaque modification.
+- Redémarrage de Apache avec `sudo systemctl reload apache2`.
+
+---
+
+# PENSEZ A LAISSER ALLUMÉE VOTRE MACHINE VIRTUELLE
+afin qu'on puisse y accéder ...
+
+
+
+afin qu'on puisse y accéder ...
+
