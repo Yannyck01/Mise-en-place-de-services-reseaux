@@ -37,7 +37,7 @@ Il comprend les **extraits de fichiers de configuration** les plus pertinents ai
 
 **Problèmes rencontrés :** Aucun problème notable.
 
-**Captures d’écran :** voir `captures/ssh_tests.png`
+**Captures d’écran :** 
 
 ---
 
