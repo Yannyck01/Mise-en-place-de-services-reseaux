@@ -221,9 +221,15 @@ afin qu'on puisse y accéder ...
 
 #### 5.1 Installation et lancement de MySql :
   **commandes utilisées:**
+  ````
   - sudo apt install mysql-server
+  ````
+  ````
   - sudo systemctl start mysql
+  ````
+  ````
   - sudo mysql_secure_installation
+  ````
 
 #### 5.2 Connection en tant que __root__ et création d'un utilisateur:
   **commandes utilisées**
