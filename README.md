@@ -217,3 +217,23 @@ afin qu'on puisse y accéder ...
 
 afin qu'on puisse y accéder ...
 
+### 5.Installation du service de base de données MySql
+
+#### 5.1 Installation et lancement de MySql :
+  **commandes utilisées:**
+  - sudo apt install mysql-server
+  - sudo systemctl start mysql
+  - sudo mysql_secure_installation
+
+#### 5.2 Connection en tant que __root__ et création d'un utilisateur:
+  **commandes utilisées**
+  - sudo mysql
+  - CREATE USER 'admin'@'localhost' IDENTIFIED BY 'infoiut2';
+  - GRANT ALL PRIVILEGES ON *.* TO 'admin'@'localhost' WITH GRANT OPTION;
+
+#### 5.3 Test du serveur:
+  **commandes utilisées**
+  - sudo systemctl restart mysql (redémarrage du service)
+  - mysqlshow -u admin -p
+  - résulat de la commande:
+![alt text](<sae reseaux.png>)
