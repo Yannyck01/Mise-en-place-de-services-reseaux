@@ -238,3 +238,19 @@ afin qu'on puisse y accéder ...
   - sudo systemctl restart mysql (redémarrage du service)
   - mysqlshow -u admin -p
   ````
+  **Problèmes rencontrés**
+  - Inactivité du service mysql après installation, problème réglé avec la commande: 
+  ````
+  sudo systemctl start mysql
+  ````
+  - Accès refusé à l'utilisateur admin lors du test du serveur dû à une mauvaise syntaxe lors de la création de celui-ci.__Commande érroné__:
+  ````
+  CREATE USER admin@localhost IDENTIFIED BY infoiut;
+  ````
+  Résolution du problème grâce à __l'ajout des ''__ dans la syntaxe de la commande:
+  ````
+  CREATE USER 'admin'@'localhost' IDENTIFIED BY 'infoiut2';
+  ````
+  - Impossibilité d'écrire @ résolu en utilisant les touches __Alt 64__
+
+
