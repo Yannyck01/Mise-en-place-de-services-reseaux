@@ -284,6 +284,10 @@ afin qu'on puisse y accéder ...
 
 #### Test de la connexion et création d'utilisateur:
   **capture d'écran de la connexion à phpmyadmin avec l'utilisateur admin**
+  - Obtention du nom DNS de la machine avec la commande:
+  ````bash
+  nslookup 10.31.33.241
+  ````
   - URL tapé:
   ````
   http://2a4v3-31uvm0497/phpmyadmin/index.php?route=/
@@ -296,10 +300,65 @@ afin qu'on puisse y accéder ...
   - Utlisateur: __mysqltest__
   - Mot de passe: __1234__
 
-**Problème rencontré**
-  Mauvaise compréhension du procéssus de connexion à phpmyadmin, tentative de connexion via la machine virtuelle avec la commande:
+**Problème rencontré:**
+  - Mauvaise compréhension du procéssus de connexion à phpmyadmin,     tentative de connexion via la machine virtuelle avec la commande:
   ````bash
   http://10.31.33.241/phpmyadmin
   ````
   Problème résolu après une discussion avec mon binôme.
   
+#### Partie 7: WordPress
+
+#### 7.1: Installation du dossier .zip:
+  **commande utilisé**
+  - ````bash
+  wget https://fr.wordpress.org/latest-fr_FR.zip
+  ````
+  - Installation de unzip pour dézipper le dossier:
+  ````bash
+  sudo apt install unzip
+  ````
+  - Dézippage du dossier:
+  ````
+  unzip latest-fr_FR.zip
+  ````
+
+#### 7.2 Creation de la base de donnée wordpress avec utilisateur du même nom sur phpmyadmin:
+  **Accords des privilèges de l'utlisateur sur la base de donnée avec la commande:**
+  - ````
+  GRANT ALL PRIVILEGES ON wordpress.* TO 'wordpress'@'localhost';
+  ````
+
+#### 7.3 Déplacement des fichiers wp dans le répertoire mon-server
+  **commande utilisé**
+  - ````bash
+  mv wp* /home/iut/mon-server
+  ````
+
+#### 7.3 Modification du fichier wp-config.php:
+  **informations ajoutées**
+  - ````bash
+  /** The name of the database for WordPress */
+  define( 'DB_NAME', 'wordpress' );
+
+  /** Database username */
+  define( 'DB_USER','wordpress' );
+
+  /** Database password */
+  define( 'DB_PASSWORD', 'Mdpwordpress498@' );
+
+  /** Database hostname */
+  define( 'DB_HOST', 'localhost:3306' );
+
+  /** Database charset to use in creating database tables. */
+  define( 'DB_CHARSET', 'utf8' );
+
+  /** The database collate type. Don't change this if in doubt. */
+  define( 'DB_COLLATE', '' );
+  ````
+
+#### 7.4 Accès à l'URL et tentative de finalisation de l'installation:
+  **problèmes rencontrés**
+  - Le serveur web __n'affiche pas__ la page wordpress permettant la connexion de l'utilisateur et la finalisation de l'installation, seule la "page d'accueil" du serveur s'affiche avec le texte "voici mon serveur virtuel". L'url renseigné est `https://2a4v3-31uvm0497.ad-urca.univ-reims.fr/`
+  - Une seconde tentative d'accès avec l'url suivant : `https://2a4v3-31uvm0497.ad-urca.univ-reims.fr/mon-server` affiche une page disant que nous n'avons pas la permission pour accéder à la ressource.
+
