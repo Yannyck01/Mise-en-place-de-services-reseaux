@@ -338,7 +338,7 @@ afin qu'on puisse y accéder ...
 #### 7.3 Modification du fichier wp-config.php:
   **informations ajoutées**
   - Informations de la base de donnée:
-  ``bash
+  ````
   /** The name of the database for WordPress */
   define( 'DB_NAME', 'wordpress' );
 
@@ -356,7 +356,8 @@ afin qu'on puisse y accéder ...
 
   /** The database collate type. Don't change this if in doubt. */
   define( 'DB_COLLATE', '' );
-  ``````
+  ````
+  
 
 #### 7.4 Accès à l'URL et tentative de finalisation de l'installation:
   **problèmes rencontrés**
