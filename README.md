@@ -259,4 +259,45 @@ afin qu'on puisse y accéder ...
   ````
   - Impossibilité d'écrire @ résolu en utilisant les touches __Alt 64__
 
+#### 6. Installation du service phpmyadmin
 
+#### 6.1 Installation de phpmyadmin:
+  **commande utilisée**
+  ````bash
+  sudo apt install phpmyadmin
+  ````
+  Verification de la précense du fichier phphmyadmin.conf:
+  ````bash
+  - cd /etc/apache2/conf-enabled
+  - ls
+  ````
+
+#### Activation du module de gestion des chaînes de caractères multi-octets:
+  **commandes utilisées**
+  ````bash
+  sudo phpenmod mbstring
+  ````
+  Redémarrage de apache2:
+  ````bash
+  sudo systemctl restart apache2
+  ````
+
+#### Test de la connexion et création d'utilisateur:
+  **capture d'écran de la connexion à phpmyadmin avec l'utilisateur admin**
+  - URL tapé:
+  ````
+  http://2a4v3-31uvm0497/phpmyadmin/index.php?route=/
+  ````
+  - Utilisateur: __admin__
+  - Mot de passe: __infoiut2__
+  **capture d'écran de la connexion à phpmyadmin avec l'utilisateur mysqltest**
+  - Utlisateur: __mysqltest__
+  - Mot de passe: __1234__
+
+**Problème rencontré**
+Mauvaise compréhension du procéssus de connexion à phpmyadmin, tentative de connexion via la machine virtuelle avec la commande:
+````bash
+http://10.31.33.241/phpmyadmin
+````
+Problème résolu après une discussion avec mon binôme.
+  
