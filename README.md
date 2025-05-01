@@ -311,7 +311,8 @@ afin qu'on puisse y accéder ...
 
 #### 7.1: Installation du dossier .zip:
   **commande utilisé**
-  - ````bash
+  - Installation du dossier .zip:
+  ````bash
   wget https://fr.wordpress.org/latest-fr_FR.zip
   ````
   - Installation de unzip pour dézipper le dossier:
@@ -325,19 +326,19 @@ afin qu'on puisse y accéder ...
 
 #### 7.2 Creation de la base de donnée wordpress avec utilisateur du même nom sur phpmyadmin:
   **Accords des privilèges de l'utlisateur sur la base de donnée avec la commande:**
-  - ````
-  GRANT ALL PRIVILEGES ON wordpress.* TO 'wordpress'@'localhost';
-  ````
+  - ````GRANT ALL PRIVILEGES ON wordpress.* TO 'wordpress'@'localhost';````
 
 #### 7.3 Déplacement des fichiers wp dans le répertoire mon-server
   **commande utilisé**
-  - ````bash
+  - Utilisation de la commande linux __mv__:
+  ````bash
   mv wp* /home/iut/mon-server
   ````
 
 #### 7.3 Modification du fichier wp-config.php:
   **informations ajoutées**
-  - ````bash
+  - Informations de la base de donnée:
+  ``bash
   /** The name of the database for WordPress */
   define( 'DB_NAME', 'wordpress' );
 
@@ -355,7 +356,7 @@ afin qu'on puisse y accéder ...
 
   /** The database collate type. Don't change this if in doubt. */
   define( 'DB_COLLATE', '' );
-  ````
+  ``````
 
 #### 7.4 Accès à l'URL et tentative de finalisation de l'installation:
   **problèmes rencontrés**
