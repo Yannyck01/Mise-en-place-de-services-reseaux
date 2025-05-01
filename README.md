@@ -336,30 +336,13 @@ afin qu'on puisse y accéder ...
   ````
 
 #### 7.3 Modification du fichier wp-config.php:
-  **informations ajoutées**
-  - Informations de la base de donnée:
-  ````
-  /** The name of the database for WordPress */
-  define( 'DB_NAME', 'wordpress' );
+  **Capture d'écran des informations ajoutées au fichier wp-config.php**
 
-  /** Database username */
-  define( 'DB_USER','wordpress' );
+#### 7.5 Redémarrage de apache2 et mySQL avec les commandes:
+  -``sudo systemctl restart apache2``
+  -``sudo systemctl restart mysql``
 
-  /** Database password */
-  define( 'DB_PASSWORD', 'Mdpwordpress498@' );
-
-  /** Database hostname */
-  define( 'DB_HOST', 'localhost:3306' );
-
-  /** Database charset to use in creating database tables. */
-  define( 'DB_CHARSET', 'utf8' );
-
-  /** The database collate type. Don't change this if in doubt. */
-  define( 'DB_COLLATE', '' );
-  ````
-  
-
-#### 7.4 Accès à l'URL et tentative de finalisation de l'installation:
+#### 7.5 Accès à l'URL et tentative de finalisation de l'installation:
   **problèmes rencontrés**
   - Le serveur web __n'affiche pas__ la page wordpress permettant la connexion de l'utilisateur et la finalisation de l'installation, seule la "page d'accueil" du serveur s'affiche avec le texte "voici mon serveur virtuel". L'url renseigné est `https://2a4v3-31uvm0497.ad-urca.univ-reims.fr/`
   - Une seconde tentative d'accès avec l'url suivant : `https://2a4v3-31uvm0497.ad-urca.univ-reims.fr/mon-server` affiche une page disant que nous n'avons pas la permission pour accéder à la ressource.
