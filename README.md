@@ -338,12 +338,7 @@ Il comprend les **extraits de fichiers de configuration** les plus pertinents ai
 
 ---
 
-# PENSEZ A LAISSER ALLUMÉE VOTRE MACHINE VIRTUELLE
-afin qu'on puisse y accéder ...
 
-
-
-afin qu'on puisse y accéder ...
 
 
 
