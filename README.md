@@ -37,7 +37,7 @@ Il comprend les **extraits de fichiers de configuration** les plus pertinents ai
 
 **Problèmes rencontrés :** Aucun problème notable.
 
-**Captures d’écran :** 
+
 
 ---
 
@@ -71,7 +71,7 @@ Il comprend les **extraits de fichiers de configuration** les plus pertinents ai
 - Problème d’accès lié aux permissions corrigé en ajustant les droits sur les répertoires.
 - Difficulté à désactiver l'indexation corrigée en éditant correctement `userdir.conf`.
 
-**Captures d’écran :** 
+
 
 #### 2.2 Installation du serveur Web virtuel
 
@@ -103,7 +103,7 @@ Il comprend les **extraits de fichiers de configuration** les plus pertinents ai
 - Problèmes de DNS corrigés après modification du `ServerName`.
 - Obligation de modifier aussi `000-default.conf` pour que HTTP redirige vers `/var/www/mon-server`.
 
-**Captures d’écran : **
+
 
 ---
 
@@ -145,7 +145,7 @@ Il comprend les **extraits de fichiers de configuration** les plus pertinents ai
 - Nécessité de corriger le nom du serveur car une mauvaise casse du DNS empêchait l’accès.
 - Le HTTP pointait initialement sur `/var/www/html` et non `/var/www/mon-server`, corrigé en ajustant également `000-default.conf`.
 
-**Captures d’écran :** 
+
 
 ---
 
@@ -183,39 +183,6 @@ Il comprend les **extraits de fichiers de configuration** les plus pertinents ai
 **Problèmes rencontrés :**
 - Difficulté initiale à commenter les lignes dans nano (problème de saisie du `#` corrigé en copiant depuis la machine locale).
 - Validation correcte du fonctionnement de PHP via phpinfo().
-
-**Captures d’écran :**
-
----
-
-## II - Webographie et recours à l'IA
-
-- **Sites consultés :**
-  - StackOverflow
-  - Forums Ubuntu-fr.org
-
-- **IA utilisée :** ChatGPT pour:
-  - Comprendre les erreurs de VirtualHost
-  - Corriger les erreurs SSL
-  - Aider à la configuration Apache et PHP
-
-**Prompts donnés :**
-- "Comment corriger l'erreur SSL certificate file not found sur Apache2"
-- "Comment configurer un VirtualHost Apache pour Ubuntu"
-- "Comment installer et configurer PHP sur Apache2"
-
-**Validité et vérifications :**
-- Tests systématiques après chaque modification.
-- Redémarrage de Apache avec `sudo systemctl reload apache2`.
-
----
-
-# PENSEZ A LAISSER ALLUMÉE VOTRE MACHINE VIRTUELLE
-afin qu'on puisse y accéder ...
-
-
-
-afin qu'on puisse y accéder ...
 
 ### 5.Installation du service de base de données MySql
 
@@ -346,4 +313,37 @@ afin qu'on puisse y accéder ...
   **problèmes rencontrés**
   - Le serveur web __n'affiche pas__ la page wordpress permettant la connexion de l'utilisateur et la finalisation de l'installation, seule la "page d'accueil" du serveur s'affiche avec le texte "voici mon serveur virtuel". L'url renseigné est `https://2a4v3-31uvm0497.ad-urca.univ-reims.fr/`
   - Une seconde tentative d'accès avec l'url suivant : `https://2a4v3-31uvm0497.ad-urca.univ-reims.fr/mon-server` affiche une page disant que nous n'avons pas la permission pour accéder à la ressource.
+
+---
+
+## II - Webographie et recours à l'IA
+
+- **Sites consultés :**
+  - StackOverflow
+  - Forums Ubuntu-fr.org
+
+- **IA utilisée :** ChatGPT pour:
+  - Comprendre les erreurs de VirtualHost
+  - Corriger les erreurs SSL
+  - Aider à la configuration Apache et PHP
+
+**Prompts donnés :**
+- "Comment corriger l'erreur SSL certificate file not found sur Apache2"
+- "Comment configurer un VirtualHost Apache pour Ubuntu"
+- "Comment installer et configurer PHP sur Apache2"
+
+**Validité et vérifications :**
+- Tests systématiques après chaque modification.
+- Redémarrage de Apache avec `sudo systemctl reload apache2`.
+
+---
+
+# PENSEZ A LAISSER ALLUMÉE VOTRE MACHINE VIRTUELLE
+afin qu'on puisse y accéder ...
+
+
+
+afin qu'on puisse y accéder ...
+
+
 
